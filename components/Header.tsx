@@ -9,6 +9,7 @@ import { useToasts } from "@/hooks/useToast";
 import { User } from "@/lib/types";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { getInitials } from "@/lib/utils";
 
 interface HeaderProps {
   user?: User | null;
@@ -19,16 +20,6 @@ export default function Header({ user, onLogout }: HeaderProps) {
   const router = useRouter();
   const { success, error: handleError } = useToasts();
   const [isLoggingOut, setIsLoggingOut] = useState(false);
-
-  const getInitials = (name?: string): string => {
-    if (!name) return "U";
-    return name
-      .split(" ")
-      .map(part => part[0])
-      .join("")
-      .toUpperCase()
-      .substring(0, 2);
-  };
 
   const handleLogout = async () => {
     try {
