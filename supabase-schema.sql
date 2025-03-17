@@ -126,3 +126,18 @@ $$ LANGUAGE plpgsql SECURITY DEFINER;
 CREATE OR REPLACE TRIGGER on_auth_user_created
   AFTER INSERT ON auth.users
   FOR EACH ROW EXECUTE FUNCTION public.handle_new_user();
+
+-- Admin function to get all profiles
+CREATE OR REPLACE FUNCTION admin_get_all_profiles()
+RETURNS SETOF profiles
+LANGUAGE plpgsql
+SECURITY DEFINER
+AS $$
+BEGIN
+  IF is_admin() THEN
+    RETURN QUERY SELECT * FROM profiles ORDER BY created_at DESC;
+  ELSE
+    RAISE EXCEPTION 'Access denied: Admin privileges required';
+  END IF;
+END;
+$$;
