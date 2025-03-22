@@ -49,7 +49,7 @@ export async function uploadAvatar(userId: string, file: File): Promise<string> 
 
   const fileExt = file.name.split(".").pop();
   const fileName = `${userId}-${Date.now()}.${fileExt}`;
-  const filePath = `avatars/${userId}/${fileName}`;
+  const filePath = `user-files/${userId}/${fileName}`;
 
   const { error: uploadError } = await supabase.storage
     .from("user-content")

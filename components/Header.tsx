@@ -38,11 +38,13 @@ export default function Header({ user, onLogout }: HeaderProps) {
   };
 
   if (isLoggingOut) {
-    <div className="flex items-center justify-center min-h-screen">
-      <div className="mr-2 h-8 w-8">
-        Logging out...
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="mr-2 h-8 w-8">
+          Logging out...
+        </div>
       </div>
-    </div>
+    );
   };
 
   return (
